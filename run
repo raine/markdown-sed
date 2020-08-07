@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+while IFS=, read -r filename alt; do
+  find . -iname '*.md' \
+    | xargs -I{} -t bash -c "sed -E 's/\[$filename\]/[$alt]/' {}"
+done < data.csv
